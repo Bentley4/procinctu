@@ -39,29 +39,35 @@ class ProcinctuWindow(pyglet.window.Window):
             pyglet.clock.schedule_interval(func = self.update3, interval =
 1/60.)         
             
-
         if symbol == pyglet.window.key.RIGHT:
             print "The 'RIGHT' key was pressed"
             pyglet.clock.schedule_interval(func = self.update1, interval = 1/60.)
         if symbol == pyglet.window.key.LEFT:
             print "The 'LEFT' key was pressed"
+            pyglet.clock.schedule_interval(func = self.update1, interval = 1/60.)
         if symbol == pyglet.window.key.S:
             self.music = pyglet.media.load("Comet.wav", streaming = False)
             self.music.play() 
         if symbol == pyglet.window.key.UP:
-            pyglet.clock.schedule_interval(func = self.update2, interval = 1/60.)
+            pyglet.clock.schedule_interval(func = self.update1, interval = 1/60.)
             print "The 'UP' key was pressed"
+        if symbol == pyglet.window.key.DOWN:
+            pyglet.clock.schedule_interval(func = self.update1, interval = 1/60.)
+            print "The 'DOWN' key was pressed"
+
 
     def on_key_release(self, symbol, modifiers):
         self.keys_held.pop(self.keys_held.index(symbol))
 
     def update1(self, interval):
-        # Move 10 pixels per second
-        self.player.x += interval * 10
-
-    def update2(self, interval): #New movement function
+        if pyglet.window.key.RIGHT in self.keys_held:
+            self.player.x += 0.1
         if pyglet.window.key.UP in self.keys_held:
-            self.player.y += 0.05
+            self.player.y += 0.1
+        if pyglet.window.key.DOWN in self.keys_held:
+            self.player.y -= 0.1
+        if pyglet.window.key.LEFT in self.keys_held:
+            self.player.x -= 0.1
 
     def update3(self, interval):
         # Move 10 pixels per second
