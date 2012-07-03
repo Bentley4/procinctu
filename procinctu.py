@@ -2,8 +2,15 @@ import pyglet
 
 class Assassin(pyglet.sprite.Sprite):
     def __init__(self, batch):
-        pyglet.sprite.Sprite.__init__(self, pyglet.resource.image("assassin1.png"), x = 50)
+        pyglet.sprite.Sprite.__init__(self, pyglet.resource.image("assassin1.png"))
+        self.x = 50
         self.y = 30
+
+    def forward_movement(self):
+        pyglet.sprite.Sprite.__init__(self,
+pyglet.resource.image("assassin2.png"), x = self.x, y = self.y)
+        pyglet.sprite.Sprite.__init__(self,
+pyglet.resource.image("assassin1.png"), x = self.x, y = self.y)     
 
 class Fireball(pyglet.sprite.Sprite):
     def __init__(self, batch):
@@ -42,6 +49,7 @@ class ProcinctuWindow(pyglet.window.Window):
             self.music.play()
             print "The 'S' key was pressed"
         if symbol == pyglet.window.key.RIGHT:
+            self.player.forward_movement()
             print "The 'RIGHT' key was pressed"
         if symbol == pyglet.window.key.LEFT:
             print "The 'LEFT' key was pressed"
